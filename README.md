@@ -23,7 +23,11 @@ Add the "Authentication framework" to your project. And import it :
 import AuthenticationServices
 ````
 
-## Button view
+### Adding Capability
+
+To enable the "Apple sign in" in your application, you have to add the 'Capability' in the "Signing & Capabilities" Section in the xcodeproj. This will create an entitlements file.
+
+### Button view
 
 Declare a button from the Apple Signin, add a target and add this button to your view : 
 
@@ -31,4 +35,18 @@ Declare a button from the Apple Signin, add a target and add this button to your
     let myAuthorButton = ASAuthorizationAppleIDButton()
     myAuthorButton.addTarget(self, action: #selector(onAuthorizationButtonClick), for: .touchUpInside)
     self.appleSigninView.addSubview(myAuthorButton)
+````
+
+### Delegate
+
+Add the `ASAuthorizationControllerDelegate` to your class and overide the methods :
+
+````swift
+func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    // Compete Author
+}
+
+func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
 ````
